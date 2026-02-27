@@ -97,7 +97,7 @@ function AppContent() {
             )}
           </div>
         ) : (
-          <Landing />
+          <Landing isConnected={isConnected} />
         )}
       </main>
     </div>
@@ -129,7 +129,7 @@ function SignalGate() {
 
 // ─── Landing ──────────────────────────────────────────────────────────────────
 
-function Landing() {
+function Landing({ isConnected }) {
   return (
     <div className="w-full">
       {/* ── HERO ── */}
@@ -198,15 +198,17 @@ function Landing() {
           </div>
 
           {/* CTA row */}
-          <div className="flex flex-col items-center gap-3 animate-fade-up delay-200">
-            <ConnectButton large />
-            <p
-              className="font-mono text-xs"
-              style={{ color: "var(--text-4)", letterSpacing: "0.04em" }}
-            >
-              MetaMask · $OPG testnet tokens · Base Sepolia (84532)
-            </p>
-          </div>
+          {!isConnected && (
+            <div className="flex flex-col items-center gap-3 animate-fade-up delay-200">
+              <ConnectButton large />
+              <p
+                className="font-mono text-xs"
+                style={{ color: "var(--text-4)", letterSpacing: "0.04em" }}
+              >
+                MetaMask · $OPG testnet tokens · Base Sepolia (84532)
+              </p>
+            </div>
+          )}
 
           {/* Stat strip */}
           <div
@@ -606,9 +608,11 @@ function Landing() {
               Connect your wallet and get a TEE-verified, on-chain provable trading signal in under 30 seconds.
             </p>
           </div>
-          <div className="flex justify-center">
-            <ConnectButton large />
-          </div>
+          {!isConnected && (
+            <div className="flex justify-center">
+              <ConnectButton large />
+            </div>
+          )}
           <div
             className="inline-flex items-center gap-6 font-mono text-xs"
             style={{ color: "var(--text-4)" }}
@@ -634,3 +638,4 @@ export default function App() {
     </WagmiProvider>
   );
 }
+

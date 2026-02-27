@@ -6,18 +6,48 @@ export default function WalletStatus() {
   const { address, isCorrectNetwork, handleDisconnect, handleSwitchNetwork, isSwitching } =
     useWalletConnection();
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const triggerRef = useRef(null);
+  const copyAddress = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(address);
+        return true;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = address;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-1000px";
+      textarea.style.left = "-1000px";
+      textarea.style.opacity = "0";
+      textarea.style.pointerEvents = "none";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      return ok;
+    } catch {
+      return false;
+    }
+  };
 
   useEffect(() => {
     const onDocClick = (event) => {
       if (!menuRef.current) return;
-      if (!menuRef.current.contains(event.target)) {
+      if (
+        !menuRef.current.contains(event.target) &&
+        !triggerRef.current?.contains(event.target)
+      ) {
         setMenuOpen(false);
       }
     };
-    document.addEventListener("click", onDocClick);
-    return () => document.removeEventListener("click", onDocClick);
+    document.addEventListener("pointerdown", onDocClick);
+    return () => document.removeEventListener("pointerdown", onDocClick);
   }, []);
 
   if (!address) return null;
@@ -75,9 +105,25 @@ export default function WalletStatus() {
           }}
           onClick={() => setMenuOpen((v) => !v)}
           title={address}
+          ref={triggerRef}
+          onPointerDown={(e) => { e.stopPropagation(); }}
         >
           {truncateAddress(address)}
         </button>
+
+        {(copied || copyFailed) && (
+          <div
+            className="absolute right-0 mt-1 px-2 py-1 font-mono text-[10px]"
+            style={{
+              border: "1px solid var(--border)",
+              borderRadius: "4px",
+              background: "var(--bg-surface)",
+              color: copied ? "var(--text-2)" : "var(--text-1)",
+            }}
+          >
+            {copied ? "Copied" : "Copy failed"}
+          </div>
+        )}
 
         {menuOpen && (
           <div
@@ -89,6 +135,7 @@ export default function WalletStatus() {
               zIndex: 10,
               padding: "6px",
             }}
+            onPointerDown={(e) => { e.stopPropagation(); }}
           >
             <button
               type="button"
@@ -101,15 +148,18 @@ export default function WalletStatus() {
                 background: "rgba(255,255,255,0.03)",
                 cursor: "pointer",
               }}
+              onPointerDown={(e) => { e.stopPropagation(); }}
               onMouseEnter={(e) => { e.currentTarget.style.color = "var(--text-1)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-1)"; }}
               onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(address);
-                  setCopied(true);
+                const ok = await copyAddress();
+                setCopied(ok);
+                setCopyFailed(!ok);
+                if (ok) {
                   setTimeout(() => setCopied(false), 1200);
-                } catch {
-                  setCopied(false);
+                } else {
+                  setTimeout(() => setCopyFailed(false), 1500);
+                  window.prompt("Copy address:", address);
                 }
               }}
               title={copied ? "Copied" : "Copy address"}

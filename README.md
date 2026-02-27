@@ -50,60 +50,61 @@ og-signal/
 +-- vite.config.js
 +-- public/
 +-- src/
-¦  +-- App.jsx
-¦  +-- main.jsx
-¦  +-- index.css
-¦  +-- assets/
-¦  ¦  +-- react.svg
-¦  +-- components/
-¦  ¦  +-- icons/
-¦  ¦  ¦  +-- ArrowIcon.jsx
-¦  ¦  ¦  +-- ChainIcon.jsx
-¦  ¦  ¦  +-- LogoIcon.jsx
-¦  ¦  ¦  +-- SignalIcon.jsx
-¦  ¦  ¦  +-- SpinnerIcon.jsx
-¦  ¦  ¦  +-- VerifyIcon.jsx
-¦  ¦  ¦  +-- WalletIcon.jsx
-¦  ¦  +-- layout/
-¦  ¦  ¦  +-- Header.jsx
-¦  ¦  +-- signal/
-¦  ¦  ¦  +-- GenerateButton.jsx
-¦  ¦  ¦  +-- MarketDataCard.jsx
-¦  ¦  ¦  +-- PairSelector.jsx
-¦  ¦  ¦  +-- ReasoningPanel.jsx
-¦  ¦  ¦  +-- SignalEngine.jsx
-¦  ¦  ¦  +-- SignalResult.jsx
-¦  ¦  ¦  +-- SignalVerdict.jsx
-¦  ¦  ¦  +-- VerificationBadge.jsx
-¦  ¦  +-- ui/
-¦  ¦  ¦  +-- ErrorState.jsx
-¦  ¦  ¦  +-- GlassButton.jsx
-¦  ¦  ¦  +-- GlassPanel.jsx
-¦  ¦  ¦  +-- LoadingState.jsx
-¦  ¦  +-- wallet/
-¦  ¦     +-- ConnectButton.jsx
-¦  ¦     +-- WalletStatus.jsx
-¦  +-- config/
-¦  ¦  +-- chains.js
-¦  ¦  +-- constants.js
-¦  ¦  +-- wagmiConfig.js
-¦  +-- hooks/
-¦  ¦  +-- useMarketData.js
-¦  ¦  +-- useSignalGeneration.js
-¦  ¦  +-- useWalletConnection.js
-¦  +-- services/
-¦  ¦  +-- marketService.js
-¦  ¦  +-- promptService.js
-¦  ¦  +-- x402Service.js
-¦  +-- store/
-¦  ¦  +-- appStore.js
-¦  +-- styles/
-¦  ¦  +-- liquidGlass.css
-¦  +-- utils/
-¦     +-- formatters.js
-¦     +-- signalParser.js
+ï¿½  +-- App.jsx
+ï¿½  +-- main.jsx
+ï¿½  +-- index.css
+ï¿½  +-- assets/
+ï¿½  ï¿½  +-- react.svg
+ï¿½  +-- components/
+ï¿½  ï¿½  +-- icons/
+ï¿½  ï¿½  ï¿½  +-- ArrowIcon.jsx
+ï¿½  ï¿½  ï¿½  +-- ChainIcon.jsx
+ï¿½  ï¿½  ï¿½  +-- LogoIcon.jsx
+ï¿½  ï¿½  ï¿½  +-- SignalIcon.jsx
+ï¿½  ï¿½  ï¿½  +-- SpinnerIcon.jsx
+ï¿½  ï¿½  ï¿½  +-- VerifyIcon.jsx
+ï¿½  ï¿½  ï¿½  +-- WalletIcon.jsx
+ï¿½  ï¿½  +-- layout/
+ï¿½  ï¿½  ï¿½  +-- Header.jsx
+ï¿½  ï¿½  +-- signal/
+ï¿½  ï¿½  ï¿½  +-- GenerateButton.jsx
+ï¿½  ï¿½  ï¿½  +-- MarketDataCard.jsx
+ï¿½  ï¿½  ï¿½  +-- PairSelector.jsx
+ï¿½  ï¿½  ï¿½  +-- ReasoningPanel.jsx
+ï¿½  ï¿½  ï¿½  +-- SignalEngine.jsx
+ï¿½  ï¿½  ï¿½  +-- SignalResult.jsx
+ï¿½  ï¿½  ï¿½  +-- SignalVerdict.jsx
+ï¿½  ï¿½  ï¿½  +-- VerificationBadge.jsx
+ï¿½  ï¿½  +-- ui/
+ï¿½  ï¿½  ï¿½  +-- ErrorState.jsx
+ï¿½  ï¿½  ï¿½  +-- GlassButton.jsx
+ï¿½  ï¿½  ï¿½  +-- GlassPanel.jsx
+ï¿½  ï¿½  ï¿½  +-- LoadingState.jsx
+ï¿½  ï¿½  +-- wallet/
+ï¿½  ï¿½     +-- ConnectButton.jsx
+ï¿½  ï¿½     +-- WalletStatus.jsx
+ï¿½  +-- config/
+ï¿½  ï¿½  +-- chains.js
+ï¿½  ï¿½  +-- constants.js
+ï¿½  ï¿½  +-- wagmiConfig.js
+ï¿½  +-- hooks/
+ï¿½  ï¿½  +-- useMarketData.js
+ï¿½  ï¿½  +-- useSignalGeneration.js
+ï¿½  ï¿½  +-- useWalletConnection.js
+ï¿½  +-- services/
+ï¿½  ï¿½  +-- marketService.js
+ï¿½  ï¿½  +-- promptService.js
+ï¿½  ï¿½  +-- x402Service.js
+ï¿½  +-- store/
+ï¿½  ï¿½  +-- appStore.js
+ï¿½  +-- styles/
+ï¿½  ï¿½  +-- liquidGlass.css
+ï¿½  +-- utils/
+ï¿½     +-- formatters.js
+ï¿½     +-- signalParser.js
 +-- README.md
 ```
+
 
 ## Architecture
 
