@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { WagmiProvider } from "wagmi";
 import { wagmiConfig } from "./config/wagmiConfig";
@@ -76,22 +77,52 @@ function IconArrow() {
 
 function AppContent() {
   const { isConnected } = useWalletConnection();
+  const [activeTab, setActiveTab] = useState("landing");
+
+  const showSignals = activeTab === "signals";
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
       <div className="ambient-glow" />
       <div className="scanlines" />
       <div className="relative z-10">
-        <Header />
+        <Header activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
       <main className="relative z-10 px-4 pb-20">
-        {isConnected ? (
+        {showSignals ? (
           <div className="max-w-xl mx-auto pt-10">
-            <SignalEngine />
+            {isConnected ? (
+              <SignalEngine />
+            ) : (
+              <SignalGate onConnect={() => {}} />
+            )}
           </div>
         ) : (
           <Landing />
         )}
       </main>
+    </div>
+  );
+}
+
+function SignalGate() {
+  return (
+    <div
+      className="p-6 text-center space-y-4"
+      style={{
+        border: "1px solid var(--border)",
+        borderRadius: "6px",
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div className="font-mono text-sm" style={{ color: "var(--text-1)" }}>
+        Connect your wallet to open the Signal Engine.
+      </div>
+      <div className="font-mono text-xs" style={{ color: "var(--text-3)" }}>
+        Base Sepolia required. $OPG testnet tokens needed for x402 settlement.
+      </div>
+      <div className="flex justify-center">
+        <ConnectButton />
+      </div>
     </div>
   );
 }
@@ -161,7 +192,7 @@ function Landing() {
               }}
             >
               Cryptographically verifiable AI trading signals executed inside
-              a hardware-attested TEE and settled on Base Sepolia — every signal
+              a hardware-attested TEE and settled on Base Sepolia  every signal
               is an immutable on-chain proof.
             </p>
           </div>

@@ -3,9 +3,13 @@ import ConnectButton from "../wallet/ConnectButton";
 import WalletStatus from "../wallet/WalletStatus";
 import { useWalletConnection } from "../../hooks/useWalletConnection";
 
-export default function Header() {
+export default function Header({ activeTab = "landing", onTabChange }) {
   const { isConnected } = useWalletConnection();
   const [scrolled, setScrolled] = useState(false);
+  const tabs = [
+    { id: "landing", label: "Overview" },
+    { id: "signals", label: "Signal Engine" },
+  ];
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 8);
@@ -58,16 +62,46 @@ export default function Header() {
 
         {/* Center: nav links */}
         <nav className="hidden md:flex items-center gap-6">
-          {["Docs", "OpenGradient", "Base Sepolia", "Faucet"].map((item) => (
-            <span
-              key={item}
-              className="font-mono text-xs cursor-default transition-all duration-150"
-              style={{ color: "var(--text-3)", letterSpacing: "0.02em" }}
+          <div className="flex items-center gap-4">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                type="button"
+                className="font-mono text-xs transition-all duration-150"
+                style={{
+                  color: activeTab === tab.id ? "var(--text-1)" : "var(--text-3)",
+                  borderBottom: activeTab === tab.id ? "1px solid var(--text-2)" : "1px solid transparent",
+                  paddingBottom: 4,
+                  background: "transparent",
+                  borderTop: "1px solid transparent",
+                  borderLeft: "1px solid transparent",
+                  borderRight: "1px solid transparent",
+                  letterSpacing: "0.02em",
+                  cursor: "pointer",
+                }}
+                onClick={() => onTabChange?.(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <div className="h-4 w-px" style={{ background: "var(--border)" }} />
+          {[
+            { label: "Docs", href: "https://docs.opengradient.ai/" },
+            { label: "Faucet", href: "https://faucet.opengradient.ai/" },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs transition-all duration-150"
+              style={{ color: "var(--text-3)", letterSpacing: "0.02em", textDecoration: "none" }}
               onMouseEnter={(e) => { e.target.style.color = "var(--text-2)"; }}
               onMouseLeave={(e) => { e.target.style.color = "var(--text-3)"; }}
             >
-              {item}
-            </span>
+              {item.label}
+            </a>
           ))}
         </nav>
 
