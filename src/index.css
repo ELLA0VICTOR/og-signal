@@ -1,0 +1,84 @@
+@import "./styles/liquidGlass.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Core backgrounds */
+  --bg: #000000;
+  --bg-surface: #0a0a0a;
+  --bg-raised: #111111;
+  --bg-elevated: #161616;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.07);
+  --border-bright: rgba(255, 255, 255, 0.14);
+  --border-focus: rgba(255, 255, 255, 0.3);
+
+  /* Text */
+  --text-1: rgba(255, 255, 255, 0.95);
+  --text-2: rgba(255, 255, 255, 0.55);
+  --text-3: rgba(255, 255, 255, 0.3);
+  --text-4: rgba(255, 255, 255, 0.15);
+
+  /* Signal — used only on verdict */
+  --buy: #4ade80;
+  --sell: #f87171;
+  --hold: #fbbf24;
+
+  /* Functional accent */
+  --accent: #ffffff;
+
+  /* Legacy aliases (keep for any component still using these) */
+  --bg-void: #000000;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-bg-hover: rgba(255, 255, 255, 0.05);
+  --glass-bg-active: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --glass-border-bright: rgba(255, 255, 255, 0.14);
+  --glass-shine: rgba(255, 255, 255, 0.04);
+  --blur-glass: blur(0px);
+  --blur-heavy: blur(0px);
+  --signal-buy: #4ade80;
+  --signal-buy-glow: rgba(74, 222, 128, 0.15);
+  --signal-sell: #f87171;
+  --signal-sell-glow: rgba(248, 113, 113, 0.15);
+  --signal-hold: #fbbf24;
+  --signal-hold-glow: rgba(251, 191, 36, 0.15);
+  --text-primary: rgba(255, 255, 255, 0.95);
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-muted: rgba(255, 255, 255, 0.3);
+  --text-accent: rgba(255, 255, 255, 0.8);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-1);
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Scrollbar — minimal */
+::-webkit-scrollbar { width: 3px; height: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.15); }
+
+::selection { background: rgba(255,255,255,0.12); color: white; }

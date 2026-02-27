@@ -1,0 +1,184 @@
+/* =============================================
+   OG SIGNAL — PANEL & COMPONENT SYSTEM
+   Aesthetic: Bloomberg Terminal × Vercel
+   Monochrome. Precise. Minimal.
+   ============================================= */
+
+/* Base panel — thin border, no blur */
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  position: relative;
+}
+
+.glass-panel-elevated {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-bright);
+  border-radius: 6px;
+  position: relative;
+}
+
+/* Button base */
+.glass-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-1);
+  cursor: pointer;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-size: 0.75rem;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  position: relative;
+  letter-spacing: 0.02em;
+}
+
+.glass-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-bright);
+}
+
+.glass-btn:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.glass-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Signal panel variants — border only, no background tint */
+.signal-panel-buy {
+  border-color: rgba(74, 222, 128, 0.2);
+}
+.signal-panel-sell {
+  border-color: rgba(248, 113, 113, 0.2);
+}
+.signal-panel-hold {
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03) 0%,
+    rgba(255,255,255,0.07) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+  border-radius: 3px;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Ambient — very subtle, single point */
+.ambient-glow {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 200px;
+  background: radial-gradient(ellipse at center top, rgba(255,255,255,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-glow-2 {
+  display: none;
+}
+
+/* Scanlines — very subtle texture */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0) 0px,
+    rgba(0,0,0,0) 3px,
+    rgba(0,0,0,0.012) 3px,
+    rgba(0,0,0,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Tab active */
+.tab-active {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.95);
+}
+
+/* Fade in up */
+.animate-fade-in-up {
+  animation: fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cursor blink */
+.cursor-blink::after {
+  content: '▊';
+  animation: blink 1.2s step-end infinite;
+  opacity: 0.6;
+  font-size: 0.85em;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 0; }
+}
+
+/* Mono data */
+.data-mono {
+  font-family: "IBM Plex Mono", monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+/* Subtle grid background for landing */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Horizontal rule */
+.rule {
+  height: 1px;
+  background: var(--border);
+}
+
+/* Status dot */
+.dot-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 0 2px rgba(74,222,128,0.15);
+  display: inline-block;
+}
+
+/* Confidence ring */
+.confidence-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }

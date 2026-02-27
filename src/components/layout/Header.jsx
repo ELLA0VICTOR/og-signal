@@ -1,0 +1,81 @@
+import { useEffect, useState } from "react";
+import ConnectButton from "../wallet/ConnectButton";
+import WalletStatus from "../wallet/WalletStatus";
+import { useWalletConnection } from "../../hooks/useWalletConnection";
+
+export default function Header() {
+  const { isConnected } = useWalletConnection();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
+  return (
+    <header
+      className="sticky top-0 z-50 transition-all duration-200"
+      style={{
+        background: scrolled ? "rgba(0,0,0,0.94)" : "rgba(0,0,0,0.7)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: `1px solid ${scrolled ? "var(--border)" : "transparent"}`,
+      }}
+    >
+      {/* Full-width container, padding on edges */}
+      <div
+        className="w-full px-6 flex items-center justify-between"
+        style={{ height: 52, maxWidth: "100%" }}
+      >
+        {/* Left: wordmark */}
+        <div className="flex items-center gap-2">
+          {/* Tiny signal SVG */}
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <circle cx="7" cy="7" r="1.5" fill="rgba(255,255,255,0.5)" />
+            <path d="M4.5 9.5a3.5 3.5 0 010-5" stroke="rgba(255,255,255,0.3)" strokeWidth="1.1" strokeLinecap="round" />
+            <path d="M9.5 4.5a3.5 3.5 0 010 5" stroke="rgba(255,255,255,0.3)" strokeWidth="1.1" strokeLinecap="round" />
+            <path d="M2.5 11.5a6.5 6.5 0 010-9" stroke="rgba(255,255,255,0.12)" strokeWidth="1.1" strokeLinecap="round" />
+            <path d="M11.5 2.5a6.5 6.5 0 010 9" stroke="rgba(255,255,255,0.12)" strokeWidth="1.1" strokeLinecap="round" />
+          </svg>
+          <span
+            className="font-mono font-medium"
+            style={{
+              color: "rgba(255,255,255,0.8)",
+              fontSize: "0.8rem",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            OG Signal
+          </span>
+          <span
+            className="font-mono text-xs"
+            style={{ color: "var(--text-4)", marginLeft: 2 }}
+          >
+            / v1
+          </span>
+        </div>
+
+        {/* Center: nav links */}
+        <nav className="hidden md:flex items-center gap-6">
+          {["Docs", "OpenGradient", "Base Sepolia", "Faucet"].map((item) => (
+            <span
+              key={item}
+              className="font-mono text-xs cursor-default transition-all duration-150"
+              style={{ color: "var(--text-3)", letterSpacing: "0.02em" }}
+              onMouseEnter={(e) => { e.target.style.color = "var(--text-2)"; }}
+              onMouseLeave={(e) => { e.target.style.color = "var(--text-3)"; }}
+            >
+              {item}
+            </span>
+          ))}
+        </nav>
+
+        {/* Right: wallet */}
+        <div>
+          {isConnected ? <WalletStatus /> : <ConnectButton />}
+        </div>
+      </div>
+    </header>
+  );
+}
