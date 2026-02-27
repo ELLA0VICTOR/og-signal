@@ -1,4 +1,5 @@
-export const OG_LLM_ENDPOINT = "https://llm.opengradient.ai";
+export const OG_LLM_ENDPOINT =
+  import.meta.env.VITE_OG_LLM_ENDPOINT || "http://localhost:8788";
 export const OG_EXPLORER = "https://explorer.opengradient.ai";
 export const BASE_SEPOLIA_EXPLORER = "https://sepolia.basescan.org";
 export const OPG_TOKEN_ADDRESS = "0x240b09731D96979f50B2C649C9CE10FcF9C7987F";

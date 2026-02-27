@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useAccount } from "wagmi";
-import { callOGLLM, createBrowserWalletClient } from "../services/x402Service";
+import { callOGLLM } from "../services/x402Service";
 import { buildSignalPrompt } from "../services/promptService";
 import { parseSignalResponse } from "../utils/signalParser";
 import { useAppStore } from "../store/appStore";
@@ -21,22 +21,18 @@ export function useSignalGeneration() {
 
     try {
       setLoadingStep(1);
-      const walletClient = createBrowserWalletClient(address);
-
-      setLoadingStep(2);
       const messages = buildSignalPrompt(selectedPair, marketData);
 
-      setLoadingStep(3);
+      setLoadingStep(2);
       const { content, txHash, model } = await callOGLLM({
-        walletClient,
         messages,
         maxTokens: 600,
       });
 
-      setLoadingStep(4);
+      setLoadingStep(3);
       const signal = parseSignalResponse(content);
 
-      setLoadingStep(5);
+      setLoadingStep(4);
       setSignalResult({
         ...signal,
         txHash,

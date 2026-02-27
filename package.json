@@ -7,12 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server:py": "uvicorn server_py.app:app --host 0.0.0.0 --port 8788"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.56.0",
-    "@x402/evm": "^2.5.0",
-    "@x402/fetch": "^2.5.0",
     "buffer": "^6.0.3",
     "ethers": "^6.16.0",
     "react": "^19.2.0",
