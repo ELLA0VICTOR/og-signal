@@ -41,67 +41,82 @@ Base Sepolia RPC is configured in `src/config/wagmiConfig.js`.
 
 ## Project Structure
 
-```text
-.
-+-- index.html
-+-- package.json
-+-- postcss.config.js
-+-- tailwind.config.js
-+-- vite.config.js
-+-- src
-   +-- App.jsx
-   +-- main.jsx
-   +-- index.css
-   +-- assets
-   �  +-- react.svg
-   +-- components
-   �  +-- icons
-   �  �  +-- ArrowIcon.jsx
-   �  �  +-- ChainIcon.jsx
-   �  �  +-- LogoIcon.jsx
-   �  �  +-- SignalIcon.jsx
-   �  �  +-- SpinnerIcon.jsx
-   �  �  +-- VerifyIcon.jsx
-   �  �  +-- WalletIcon.jsx
-   �  +-- layout
-   �  �  +-- Header.jsx
-   �  +-- signal
-   �  �  +-- GenerateButton.jsx
-   �  �  +-- MarketDataCard.jsx
-   �  �  +-- PairSelector.jsx
-   �  �  +-- ReasoningPanel.jsx
-   �  �  +-- SignalEngine.jsx
-   �  �  +-- SignalResult.jsx
-   �  �  +-- SignalVerdict.jsx
-   �  �  +-- VerificationBadge.jsx
-   �  +-- ui
-   �  �  +-- ErrorState.jsx
-   �  �  +-- GlassButton.jsx
-   �  �  +-- GlassPanel.jsx
-   �  �  +-- LoadingState.jsx
-   �  +-- wallet
-   �     +-- ConnectButton.jsx
-   �     +-- WalletStatus.jsx
-   +-- config
-   �  +-- chains.js
-   �  +-- constants.js
-   �  +-- wagmiConfig.js
-   +-- hooks
-   �  +-- useMarketData.js
-   �  +-- useSignalGeneration.js
-   �  +-- useWalletConnection.js
-   +-- services
-   �  +-- marketService.js
-   �  +-- promptService.js
-   �  +-- x402Service.js
-   +-- store
-   �  +-- appStore.js
-   +-- styles
-   �  +-- liquidGlass.css
-   +-- utils
-      +-- formatters.js
-      +-- signalParser.js
-```
+og-signal/
+│
+├── index.html
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── package.json
+├── .env.example
+│
+├── public/
+│   └── favicon.svg
+│
+└── src/
+    │
+    ├── main.jsx
+    ├── App.jsx
+    ├── index.css
+    │
+    ├── styles/
+    │   └── liquidGlass.css
+    │
+    ├── config/
+    │   ├── constants.js
+    │   ├── chains.js
+    │   └── wagmiConfig.js
+    │
+    ├── store/
+    │   └── appStore.js
+    │
+    ├── utils/
+    │   ├── formatters.js
+    │   └── signalParser.js
+    │
+    ├── services/
+    │   ├── marketService.js
+    │   ├── promptService.js
+    │   └── x402Service.js
+    │
+    ├── hooks/
+    │   ├── useMarketData.js
+    │   ├── useWalletConnection.js
+    │   └── useSignalGeneration.js
+    │
+    └── components/
+        │
+        ├── layout/
+        │   └── Header.jsx
+        │
+        ├── wallet/
+        │   ├── ConnectButton.jsx
+        │   └── WalletStatus.jsx
+        │
+        ├── signal/
+        │   ├── SignalEngine.jsx
+        │   ├── PairSelector.jsx
+        │   ├── MarketDataCard.jsx
+        │   ├── GenerateButton.jsx
+        │   ├── SignalResult.jsx
+        │   ├── SignalVerdict.jsx
+        │   ├── ReasoningPanel.jsx
+        │   └── VerificationBadge.jsx
+        │
+        └── ui/
+            ├── GlassPanel.jsx
+            ├── GlassButton.jsx
+            ├── LoadingState.jsx
+            ├── ErrorState.jsx
+            │
+            └── icons/
+                ├── LogoIcon.jsx
+                ├── WalletIcon.jsx
+                ├── ChainIcon.jsx
+                ├── SignalIcon.jsx
+                ├── VerifyIcon.jsx
+                ├── ArrowIcon.jsx
+                └── SpinnerIcon.jsx
 
 ## Architecture
 
