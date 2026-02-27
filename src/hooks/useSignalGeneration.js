@@ -40,6 +40,7 @@ export function useSignalGeneration() {
         pair: selectedPair,
         generatedAt: new Date().toISOString(),
       });
+
     } catch (err) {
       if (err.message === "NO_METAMASK") {
         setError("Please install MetaMask to continue");
