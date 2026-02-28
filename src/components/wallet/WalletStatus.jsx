@@ -10,11 +10,11 @@ export default function WalletStatus() {
   if (!address) return null;
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 flex-wrap justify-end">
       {/* Network */}
       {isCorrectNetwork ? (
         <div
-          className="flex items-center gap-1.5 px-2.5 py-1 font-mono text-xs"
+          className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 font-mono text-xs"
           style={{
             border: "1px solid var(--border)",
             borderRadius: "4px",

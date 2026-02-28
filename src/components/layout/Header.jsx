@@ -29,8 +29,8 @@ export default function Header({ activeTab = "landing", onTabChange }) {
     >
       {/* Full-width container, padding on edges */}
       <div
-        className="w-full px-6 flex items-center justify-between"
-        style={{ height: 52, maxWidth: "100%" }}
+        className="w-full px-3 sm:px-6 flex items-center justify-between gap-3"
+        style={{ minHeight: 52, maxWidth: "100%" }}
       >
         {/* Left: wordmark */}
         <div className="flex items-center gap-2">
@@ -53,7 +53,7 @@ export default function Header({ activeTab = "landing", onTabChange }) {
             OG Signal
           </span>
           <span
-            className="font-mono text-xs"
+            className="font-mono text-xs hidden sm:inline"
             style={{ color: "var(--text-4)", marginLeft: 2 }}
           >
             / v1
@@ -106,8 +106,55 @@ export default function Header({ activeTab = "landing", onTabChange }) {
         </nav>
 
         {/* Right: wallet */}
-        <div>
+        <div className="shrink-0">
           {isConnected ? <WalletStatus /> : <ConnectButton />}
+        </div>
+      </div>
+
+      <div
+        className="md:hidden px-3 pb-2 flex items-center justify-between gap-3"
+        style={{ borderTop: "1px solid var(--border)" }}
+      >
+        <div className="flex items-center gap-2 overflow-x-auto">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              className="font-mono text-xs transition-all duration-150 whitespace-nowrap"
+              style={{
+                color: activeTab === tab.id ? "var(--text-1)" : "var(--text-3)",
+                border: `1px solid ${activeTab === tab.id ? "var(--border-bright)" : "var(--border)"}`,
+                borderRadius: "4px",
+                padding: "4px 8px",
+                background: "transparent",
+                letterSpacing: "0.02em",
+                cursor: "pointer",
+              }}
+              onClick={() => onTabChange?.(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        <div className="flex items-center gap-3 shrink-0">
+          <a
+            href="https://docs.opengradient.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs"
+            style={{ color: "var(--text-3)", textDecoration: "none" }}
+          >
+            Docs
+          </a>
+          <a
+            href="https://faucet.opengradient.ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-mono text-xs"
+            style={{ color: "var(--text-3)", textDecoration: "none" }}
+          >
+            Faucet
+          </a>
         </div>
       </div>
     </header>

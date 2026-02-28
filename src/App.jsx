@@ -87,7 +87,7 @@ function AppContent() {
       <div className="relative z-10">
         <Header activeTab={activeTab} onTabChange={setActiveTab} />
       </div>
-      <main className="relative z-10 px-4 pb-20">
+      <main className="relative z-10 px-3 sm:px-4 pb-20">
         {showSignals ? (
           <div className="max-w-xl mx-auto pt-10">
             {isConnected ? (
@@ -148,7 +148,7 @@ function Landing({ isConnected }) {
           }}
         />
 
-        <div className="relative max-w-5xl mx-auto px-6 py-24 text-center space-y-10">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center space-y-10">
           {/* Status pill */}
           <div className="flex justify-center animate-fade-up">
             <div
@@ -212,7 +212,7 @@ function Landing({ isConnected }) {
 
           {/* Stat strip */}
           <div
-            className="animate-fade-up delay-300 grid grid-cols-3 divide-x mx-auto"
+            className="animate-fade-up delay-300 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x mx-auto"
             style={{
               maxWidth: 560,
               border: "1px solid var(--border)",
@@ -251,7 +251,7 @@ function Landing({ isConnected }) {
 
       {/* ── HOW IT WORKS ── */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
           <div className="mb-10">
             <p
               className="font-mono text-xs uppercase tracking-widest"
@@ -330,7 +330,7 @@ function Landing({ isConnected }) {
 
       {/* ── FEATURES ── */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
           <div className="mb-10">
             <p
               className="font-mono text-xs uppercase tracking-widest"
@@ -431,7 +431,7 @@ function Landing({ isConnected }) {
 
       {/* ── TERMINAL PREVIEW ── */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
           <div className="mb-10">
             <p
               className="font-mono text-xs uppercase tracking-widest"
@@ -544,7 +544,7 @@ function Landing({ isConnected }) {
 
       {/* ── SUPPORTED PAIRS ── */}
       <section style={{ borderBottom: "1px solid var(--border)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
           <div className="mb-10">
             <p
               className="font-mono text-xs uppercase tracking-widest"
@@ -592,7 +592,7 @@ function Landing({ isConnected }) {
 
       {/* ── BOTTOM CTA ── */}
       <section>
-        <div className="max-w-5xl mx-auto px-6 py-20 text-center space-y-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-20 text-center space-y-8">
           <div className="space-y-3">
             <h2
               className="font-mono font-semibold"
@@ -614,7 +614,7 @@ function Landing({ isConnected }) {
             </div>
           )}
           <div
-            className="inline-flex items-center gap-6 font-mono text-xs"
+            className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 font-mono text-xs"
             style={{ color: "var(--text-4)" }}
           >
             <span>Free testnet</span>
