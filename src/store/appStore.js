@@ -1,10 +1,13 @@
 import { create } from "zustand";
-import { TRADING_PAIRS } from "../config/constants";
+import { SIGNAL_TIMEFRAMES, TRADING_PAIRS } from "../config/constants";
 
 export const useAppStore = create((set) => ({
   // Selected trading pair
   selectedPair: TRADING_PAIRS[0],
   setSelectedPair: (pair) => set({ selectedPair: pair, signalResult: null, error: null }),
+  selectedTimeframe: SIGNAL_TIMEFRAMES[2],
+  setSelectedTimeframe: (timeframe) =>
+    set({ selectedTimeframe: timeframe, signalResult: null, error: null }),
 
   // Market data
   marketData: null,

@@ -9,7 +9,15 @@ import { LOADING_STEPS } from "../config/constants";
 export function useSignalGeneration() {
   const { address } = useAccount();
   const [loadingStep, setLoadingStep] = useState(0);
-  const { selectedPair, marketData, setSignalResult, setLoading, setError, isLoading } = useAppStore();
+  const {
+    selectedPair,
+    selectedTimeframe,
+    marketData,
+    setSignalResult,
+    setLoading,
+    setError,
+    isLoading,
+  } = useAppStore();
 
   const generateSignal = useCallback(async () => {
     if (!address || !marketData || isLoading) return;
@@ -21,7 +29,7 @@ export function useSignalGeneration() {
 
     try {
       setLoadingStep(1);
-      const messages = buildSignalPrompt(selectedPair, marketData);
+      const messages = buildSignalPrompt(selectedPair, marketData, selectedTimeframe);
 
       setLoadingStep(2);
       const { content, txHash, model } = await callOGLLM({
@@ -30,7 +38,7 @@ export function useSignalGeneration() {
       });
 
       setLoadingStep(3);
-      const signal = parseSignalResponse(content);
+      const signal = parseSignalResponse(content, selectedTimeframe.outputLabel);
 
       setLoadingStep(4);
       setSignalResult({
@@ -38,6 +46,7 @@ export function useSignalGeneration() {
         txHash,
         model,
         pair: selectedPair,
+        requestedTimeframe: selectedTimeframe.outputLabel,
         generatedAt: new Date().toISOString(),
       });
 
@@ -57,7 +66,7 @@ export function useSignalGeneration() {
       setLoading(false);
       setLoadingStep(0);
     }
-  }, [address, marketData, selectedPair, isLoading]);
+  }, [address, marketData, selectedPair, selectedTimeframe, isLoading]);
 
   return { generateSignal, loadingStep, loadingSteps: LOADING_STEPS };
 }

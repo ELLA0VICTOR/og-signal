@@ -1,4 +1,5 @@
 import PairSelector from "./PairSelector";
+import TimeframeSelector from "./TimeframeSelector";
 import MarketDataCard from "./MarketDataCard";
 import GenerateButton from "./GenerateButton";
 import SignalResult from "./SignalResult";
@@ -51,6 +52,7 @@ export default function SignalEngine() {
       )}
 
       <PairSelector />
+      <TimeframeSelector />
       <MarketDataCard />
 
       {/* Loading panel */}

@@ -2,7 +2,7 @@
  * Safely parse LLM JSON response into signal object
  * Handles cases where model wraps JSON in markdown code blocks
  */
-export function parseSignalResponse(rawContent) {
+export function parseSignalResponse(rawContent, fallbackTimeframe = "short-term (24-48h)") {
   if (!rawContent) throw new Error("Empty response from LLM");
 
   // Strip markdown code blocks if present
@@ -29,7 +29,7 @@ export function parseSignalResponse(rawContent) {
   return {
     signal: parsed.signal,
     confidence: Math.min(100, Math.max(0, parsed.confidence)),
-    timeframe: parsed.timeframe || "short-term (24-48h)",
+    timeframe: parsed.timeframe || fallbackTimeframe,
     reasoning: parsed.reasoning || "",
     keyFactors: Array.isArray(parsed.keyFactors) ? parsed.keyFactors : [],
     riskLevel: ["LOW", "MEDIUM", "HIGH"].includes(parsed.riskLevel) ? parsed.riskLevel : "MEDIUM",

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 const STEPS = [
   "", "fetching market data...", "connecting to opengradient...",
   "executing inference in TEE...", "waiting for settlement...", "parsing signal...",
@@ -6,6 +8,16 @@ const STEPS = [
 export default function LoadingState({ step = 1 }) {
   const label = STEPS[step] || "processing...";
   const progress = Math.round((step / 5) * 100);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+
+  useEffect(() => {
+    const startedAt = Date.now();
+    const timer = setInterval(() => {
+      setElapsedSeconds(Math.floor((Date.now() - startedAt) / 1000));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="px-5 py-10 flex flex-col items-center gap-6">
@@ -32,6 +44,10 @@ export default function LoadingState({ step = 1 }) {
       {/* Step fraction */}
       <div className="font-mono text-xs" style={{ color: "var(--text-4)" }}>
         {step} / 5
+      </div>
+
+      <div className="font-mono text-xs text-center" style={{ color: "var(--text-4)", maxWidth: 360 }}>
+        {`Elapsed: ${elapsedSeconds}s. Typical response is 15-45s, but settlement may take longer under network load.`}
       </div>
     </div>
   );

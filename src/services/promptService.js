@@ -1,7 +1,7 @@
 /**
  * Builds the structured LLM prompt from market data
  */
-export function buildSignalPrompt(pair, marketData) {
+export function buildSignalPrompt(pair, marketData, timeframe) {
   const {
     currentPrice,
     change24h,
@@ -18,6 +18,14 @@ export function buildSignalPrompt(pair, marketData) {
     ? currentPrice.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     : currentPrice.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 6 });
 
+  const targetTimeframe = timeframe || {
+    label: "Swing",
+    horizon: "24-72h",
+    outputLabel: "swing (24-72h)",
+    guidance:
+      "Focus on multi-day continuation or reversal setup. Weigh 7d trend and broader momentum more than noise.",
+  };
+
   const userPrompt = `Analyze the following live market data for ${pair.symbol} and generate a trading signal.
 
 LIVE MARKET DATA (${new Date().toUTCString()}):
@@ -32,6 +40,12 @@ LIVE MARKET DATA (${new Date().toUTCString()}):
 OPENGRADIENT EXECUTION CONTEXT:
 This inference runs inside a hardware-attested TEE on the OpenGradient network. The full prompt and response will be cryptographically settled on Base Sepolia as immutable proof of this analysis.
 
+TIMEFRAME MODE:
+- Requested Mode: ${targetTimeframe.label}
+- Decision Horizon: ${targetTimeframe.horizon}
+- Rule: ${targetTimeframe.guidance}
+- The "timeframe" field in your JSON output must be exactly "${targetTimeframe.outputLabel}".
+
 Respond ONLY with valid JSON in this exact format:
 {
   "signal": "BUY",
@@ -45,7 +59,8 @@ Respond ONLY with valid JSON in this exact format:
 
 The signal must be exactly one of: BUY, SELL, HOLD
 The confidence must be a number between 0 and 100
-The riskLevel must be exactly one of: LOW, MEDIUM, HIGH`;
+The riskLevel must be exactly one of: LOW, MEDIUM, HIGH
+The timeframe must be exactly "${targetTimeframe.outputLabel}"`;
 
   return [
     { role: "system", content: systemPrompt },

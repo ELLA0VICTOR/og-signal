@@ -14,6 +14,36 @@ export const TRADING_PAIRS = [
   { id: "solana", symbol: "SOL/USD", name: "Solana", coingeckoId: "solana", shortName: "SOL" },
 ];
 
+export const SIGNAL_TIMEFRAMES = [
+  {
+    id: "scalp",
+    shortName: "Scalp",
+    label: "Scalp",
+    horizon: "5-30m",
+    outputLabel: "scalp (5-30m)",
+    guidance:
+      "Focus on immediate momentum and short-lived price reactions. Prioritize 24h range positioning and recent volatility.",
+  },
+  {
+    id: "intraday",
+    shortName: "Intra",
+    label: "Intraday",
+    horizon: "4-12h",
+    outputLabel: "intraday (4-12h)",
+    guidance:
+      "Focus on same-day direction. Balance 24h trend, volume context, and mean-reversion probability.",
+  },
+  {
+    id: "swing",
+    shortName: "Swing",
+    label: "Swing",
+    horizon: "24-72h",
+    outputLabel: "swing (24-72h)",
+    guidance:
+      "Focus on multi-day continuation or reversal setup. Weigh 7d trend and broader momentum more than noise.",
+  },
+];
+
 // OpenGradient pre-deployed ML workflow contracts (Alpha Testnet - Chain 10744)
 export const OG_WORKFLOW_CONTRACTS = {
   ETH_1HR_VOLATILITY: "0xD5629A5b95dde11e4B5772B5Ad8a13B933e33845",
